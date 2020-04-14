@@ -5,7 +5,8 @@ export default class MyChildComp extends React.Component {
 
 
     render() {
-
+        return this.props.children
+        // return <View>{this.props.children}</View>
 
         return (
             <View>

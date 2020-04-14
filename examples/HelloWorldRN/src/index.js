@@ -9,21 +9,21 @@ import {
 
 
 import A from './a'
-import B from './b'
-import C from './c'
-import D from './d'
-import E from './e'
-import F from './f'
-import G from './g'
-import Video from './g/Video'
-import Map from './g/Map'
-import Form from './g/Form'
-import Canvas from './g/Canvas'
-import Custom from './g/Custom'
+// import B from './b'
+// import C from './c'
+// import D from './d'
+// import E from './e'
+// import F from './f'
+// import G from './g'
+// import Video from './g/Video'
+// import Map from './g/Map'
+// import Form from './g/Form'
+// import Canvas from './g/Canvas'
+// import Custom from './g/Custom'
 
-import faxianPNG from '../assets/faxian.png'
-import myCurrentPNG from '../assets/myCurrent.png'
-import myPNG from '../assets/my.png'
+// import faxianPNG from '../assets/faxian.png'
+// import myCurrentPNG from '../assets/myCurrent.png'
+// import myPNG from '../assets/my.png'
 
 
 
@@ -58,13 +58,14 @@ export default class App extends PureComponent {
                     title: 'HelloWorld'
                 }}
             >
-                <TabRouter text="常见写法" image={faxianPNG} selectedImage={require('../assets/faxianCurrent.png')}>
+                 <Route key={"A"} component={A}/>
+                {/* <TabRouter text="常见写法" image={faxianPNG} selectedImage={require('../assets/faxianCurrent.png')}>
                     <Route key={"A"} component={A}/>
                     <Route subpage="sp1" key={"C"} component={C}/>
                     <Route subpage="sp2" key={"E"} component={E}/>
-                </TabRouter>
+                </TabRouter> */}
 
-                <TabRouter text="RN组件" image={require('../assets/comp_desel.png')} selectedImage={require('../assets/comp_sel.png')}>
+                {/* <TabRouter text="RN组件" image={require('../assets/comp_desel.png')} selectedImage={require('../assets/comp_sel.png')}>
                     <Route key={"B"} component={B}/>
                 </TabRouter>
 
@@ -83,7 +84,7 @@ export default class App extends PureComponent {
                     <Route key={"Canvas"} component={Canvas}/>
                     <Route key={"Form"} component={Form}/>
                     <Route key={"Custom"} component={Custom}/>
-                </TabRouter>
+                </TabRouter> */}
             </Router>
         )
     }

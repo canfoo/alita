@@ -19,6 +19,20 @@ export default function cptCompHandler (ast, info) {
     const go = geneOrder()
     errorLogTraverse(ast, {
         enter: path => {
+            // return this.props.children 替换成 <view original="View">{this.props.children}</view>
+           //TODO 可以优化
+           if (path.type === 'MemberExpression') {
+                const pc = getPropsChain(path.node)
+                if (pc.length === 3 && pc[0] === 'this' && pc[1] === 'props' && pc[2] === 'children') {
+                    const parentPath = path.parentPath;
+                    if(parentPath.type === 'ReturnStatement'){
+                        let reElement = t.jsxElement(t.jsxOpeningElement(t.jsxIdentifier('block'),
+                        [t.jsxAttribute(t.jsxIdentifier('original'), t.stringLiteral('View'))]), t.jsxClosingElement(t.jsxIdentifier('block')), [t.jsxExpressionContainer(path.node)], true);
+                    path.replaceWith(reElement)
+                    }
+                }
+            }
+
             // 处理直接是<V>{this.props.children}</V> 这种情况
             if (path.type === 'JSXExpressionContainer'
                 && path.node.expression.type === 'MemberExpression'
