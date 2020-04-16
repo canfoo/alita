@@ -28,7 +28,7 @@ import {
 // import MyRefComp from './MyRefComp'
 // import MyPropComp from './MyPropComp'
 // import MyFunComp from './MyFunComp'
-// import MyChildComp from './MyChildComp'
+import MyChildComp from './MyChildComp'
 // import MyStyleComp from './MyStyleComp'
 // import PlatformComp from './PlatformComp'
 // import MyHoc from './MyHoc'
@@ -48,33 +48,54 @@ import {
 
 // import {history} from '@areslabs/router'
 
-
-class Acom extends Component {
-    renderFun() {
-        return this.props.children
-    }
-    render() {
-         return (
-            <View style={{height: 200}}>
-                {this.renderFun()}
-            </View>
-         )
-    }
-}
-
 export default class B extends Component {
+    constructor() {
+        super()
+        this.state = {
+            num: 1
+        }
+    }
+
+    componentDidMount() {
+        setInterval(() => {
+            // console.log('this.setState', this.setState)
+            this.setState({
+                num: this.state.num + 1
+            }, () => {
+                // console.log('callback...', this)
+            })
+        }, 2000);
+            //         this.setState({
+            //     num: this.state.num + 1
+            // }, () => {
+            //     // console.log('callback...', this)
+            // })
+    }
+
+    getLayout(event) {
+        console.log('event11', event.nativeEvent.layout)
+        // console.log('num', this.state.num)
+    }
 
     render() {
-       
+        // console.log('_layoutEvents_', _layoutEvents_)
         return (
-            <View style={{height: 600, backgroundColor: 'yellow'}}>
-                <Acom>
-                    <View style={{flex: 1, backgroundColor: 'orange'}}>123</View>
-                </Acom>
-                {/* <Acom>
-                    <View style={{flex: 2, backgroundColor: 'blue'}}></View>
-                    <View style={{flex: 3, backgroundColor: 'red'}}></View>
-                </Acom> */}
+            <View  style={{height: 600, backgroundColor: 'yellow'}}>
+
+                <View 
+                    style={{height: 50, width: 100, marginLeft: 30, backgroundColor: 'red'}}
+                    onLayout={this.getLayout.bind(this)}
+                >
+                {/* <View onLayout={(event)=>console.log('event11', event.nativeEvent.layout)}> */}
+                                    <Text>kkkk {this.state.num}</Text>
+                                </View>
+
+                                {
+                    this.state.num % 2 === 0  &&   <View onLayout={(event)=>console.log('event22', event.nativeEvent.layout)}>
+                                    <Text>kkkk {this.state.num}</Text>
+                                </View>
+                }
+                   <MyChildComp onLayout={(event)=>console.log('子组件22222', event.nativeEvent.layout)} />             
             </View>
         )
     }
